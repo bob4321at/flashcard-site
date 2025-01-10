@@ -41,7 +41,6 @@ func main() {
 
 	r.GET("/question", func(c *gin.Context) {
 		data, _ := json.Marshal(test_question)
-		fmt.Println(data)
 		c.JSON(http.StatusOK, data)
 	})
 
