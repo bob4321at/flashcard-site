@@ -18,13 +18,30 @@ type Question struct {
 	Answer   []Answer `json: Answer`
 }
 
-var test_question = Question{
-	"what color is grass",
-	[]Answer{
-		{"blue", false},
-		{"green", true},
-		{"yellow", false},
-		{"red", false},
+type Quiz struct {
+	Questions []Question `json: Questions`
+}
+
+var test_question = Quiz{
+	[]Question{
+		{
+			"what color is grass",
+			[]Answer{
+				{"blue", false},
+				{"green", true},
+				{"yellow", false},
+				{"red", false},
+			},
+		},
+		{
+			"what color is the sky",
+			[]Answer{
+				{"blue", true},
+				{"green", false},
+				{"yellow", false},
+				{"red", false},
+			},
+		},
 	},
 }
 

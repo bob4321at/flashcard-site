@@ -9,6 +9,7 @@ start_button.onclick = function() {
 let game = document.getElementById("game")
 let question = document.getElementById("question")
 let answers = document.getElementById("anwsers")
+let current_prompt = 0
 
 game.hidden = true
 
@@ -33,18 +34,20 @@ async function getQuestion() {
 }
 
 async function updateGame() {
-  let prompt = await getQuestion()
+  let prompts = await getQuestion()
 
-  question.innerHTML = prompt.Question
+  question.innerHTML = prompts.Questions[current_prompt].Question
 
-  answers.children[0].innerHTML = prompt.Answer[0].Text
-  answers.children[1].innerHTML = prompt.Answer[1].Text
-  answers.children[2].innerHTML = prompt.Answer[2].Text
-  answers.children[3].innerHTML = prompt.Answer[3].Text
+  answers.children[0].innerHTML = prompts.Questions[current_prompt].Answer[0].Text
+  answers.children[1].innerHTML = prompts.Questions[current_prompt].Answer[1].Text
+  answers.children[2].innerHTML = prompts.Questions[current_prompt].Answer[2].Text
+  answers.children[3].innerHTML = prompts.Questions[current_prompt].Answer[3].Text
 
     answers.children[0].onclick = function() {
       if (right_or_wrong[0] == true) {
         alert("correct")
+        current_prompt += 1
+        updateGame()
       }else {
         alert("wrong")
       }
@@ -52,6 +55,8 @@ async function updateGame() {
     answers.children[1].onclick = function() {
       if (right_or_wrong[1] == true) {
         alert("correct")
+        current_prompt += 1
+        updateGame()
       }else {
         alert("wrong")
       }
@@ -59,6 +64,8 @@ async function updateGame() {
     answers.children[2].onclick = function() {
       if (right_or_wrong[2] == true) {
         alert("correct")
+        current_prompt += 1
+        updateGame()
       } else {
         alert("wrong")
       }
@@ -66,14 +73,16 @@ async function updateGame() {
     answers.children[3].onclick = function() {
       if (right_or_wrong[3] == true) {
         alert("correct")
+        current_prompt += 1
+        updateGame()
       } else {
         alert("wrong")
       }
     }
 
-  right_or_wrong[0] = prompt.Answer[0].R_Or_W
-  right_or_wrong[1] = prompt.Answer[1].R_Or_W
-  right_or_wrong[2] = prompt.Answer[2].R_Or_W
-  right_or_wrong[3] = prompt.Answer[3].R_Or_W
+  right_or_wrong[0] = prompts.Questions[current_prompt].Answer[0].R_Or_W
+  right_or_wrong[1] = prompts.Questions[current_prompt].Answer[1].R_Or_W
+  right_or_wrong[2] = prompts.Questions[current_prompt].Answer[2].R_Or_W
+  right_or_wrong[3] = prompts.Questions[current_prompt].Answer[3].R_Or_W
 }
 
