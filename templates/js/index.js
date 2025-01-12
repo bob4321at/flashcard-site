@@ -20,6 +20,17 @@ let right_or_wrong = [
   false,
 ]
 
+let chart = []
+
+chart.push({
+  key: "on",
+  value: true
+})
+chart.push({
+  key: "off",
+  value: false
+})
+
 async function getQuestion() {
   let test = await fetch("/question", {
     "method": "GET",
@@ -35,10 +46,15 @@ async function getQuestion() {
 
 document.getElementById("send").onclick = function () {
   let add_question = document.getElementById("add question").value
+  let answer_one = {Text: document.getElementById("answer 1").value, R_Or_W: document.getElementById("add wor 1").checked}
+  let answer_two= {Text: document.getElementById("answer 2").value, R_Or_W: document.getElementById("add wor 2").checked}
+  let answer_three= {Text: document.getElementById("answer 3").value, R_Or_W: document.getElementById("add wor 3").checked}
+  let answer_four= {Text: document.getElementById("answer 4").value, R_Or_W: document.getElementById("add wor 4").checked}
   fetch("/test", {
     "method": "POST",
-    "body": JSON.stringify({ Question: add_question})
+    "body": JSON.stringify({ Question: add_question, Answer: [answer_one, answer_two, answer_three, answer_four] })
   })
+  console.log({ Question: add_question, Answer: [answer_one, answer_two, answer_three, answer_four] })
 }
 
 async function updateGame() {

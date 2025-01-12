@@ -71,9 +71,11 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		new_sentance := Test{}
+		new_sentance := Question{}
 		json.Unmarshal(info, &new_sentance)
 		fmt.Println(new_sentance)
+
+		test_question.Questions = append(test_question.Questions, new_sentance)
 	})
 
 	r.Run()
