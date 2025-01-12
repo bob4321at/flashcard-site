@@ -33,7 +33,7 @@ async function getQuestion() {
   return object
 }
 
-function sendText() {
+document.getElementById("send").onclick = function () {
   test = document.getElementById("input").value
   fetch("/test", {
     "method": "POST",
