@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -20,6 +21,10 @@ type Question struct {
 
 type Quiz struct {
 	Questions []Question `json: Questions`
+}
+
+type Test struct {
+	Sentance string `json: Sentance`
 }
 
 var test_question = Quiz{
@@ -59,6 +64,16 @@ func main() {
 	r.GET("/question", func(c *gin.Context) {
 		data, _ := json.Marshal(test_question)
 		c.JSON(http.StatusOK, data)
+	})
+
+	r.POST("/test", func(c *gin.Context) {
+		info, err := io.ReadAll(c.Request.Body)
+		if err != nil {
+			panic(err)
+		}
+		new_sentance := Test{}
+		json.Unmarshal(info, &new_sentance)
+		fmt.Println(new_sentance)
 	})
 
 	r.Run()

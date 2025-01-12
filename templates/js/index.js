@@ -33,6 +33,14 @@ async function getQuestion() {
   return object
 }
 
+function sendText() {
+  test = document.getElementById("input").value
+  fetch("/test", {
+    "method": "POST",
+    "body": JSON.stringify({ Sentance: test })
+  })
+}
+
 async function updateGame() {
   let prompts = await getQuestion()
 
