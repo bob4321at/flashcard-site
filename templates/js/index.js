@@ -34,10 +34,10 @@ async function getQuestion() {
 }
 
 document.getElementById("send").onclick = function () {
-  test = document.getElementById("input").value
+  let add_question = document.getElementById("add question").value
   fetch("/test", {
     "method": "POST",
-    "body": JSON.stringify({ Sentance: test })
+    "body": JSON.stringify({ Question: add_question})
   })
 }
 
